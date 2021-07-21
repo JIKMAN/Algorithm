@@ -1,8 +1,8 @@
 ## 자료구조
 
-* 스토리지 vs 메모리
+* [스토리지 vs 메모리](https://github.com/JIKMAN/Algorithm/blob/master/Data-Structure.md)
 * 배열
-    * 정적배열 vs 동적배열
+    * [정적배열 vs 동적배열](https://github.com/JIKMAN/Algorithm/blob/master/Data-Structure.md)
 ### 선형 자료구조
 
 * 리스트
