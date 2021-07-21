@@ -15,12 +15,6 @@
 # print('추출 -> ', data)
 # print(stack)
 
-# data = stack[top]
-# stack[top] = None
-# top -= 1
-# print('추출 -> ', data)
-# print(stack)
-
 
 
 SIZE = 5
@@ -42,7 +36,13 @@ def push(data):
     top += 1
     stack[top] = data
 
+def pop():
+    global SIZE, stack, top
+    return stack[top]
+
+
 push('커피')
 push('녹차')
 push('꿀물')
+stack.pop()
 print(stack)
