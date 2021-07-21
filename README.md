@@ -1,3 +1,5 @@
+\# 제목을 누르면 해당 페이지로 이동합니다.
+
 ### [자료구조](https://github.com/JIKMAN/Algorithm/blob/master/Data-Structure.md)
 
 * 스토리지 vs 메모리
@@ -8,10 +10,10 @@
 * 추상 자료형 실행속도 비교
 ### 선형 자료구조
 
-* 리스트
+* [리스트](https://github.com/JIKMAN/Algorithm/tree/master/list)
     * 싱글 링크드 리스트
     * 더블 링크드 리스트
-* 해시테이블
+* [해시테이블](https://github.com/JIKMAN/Algorithm/tree/master/Hash-Table)
     * 해시 충돌
     * Chaining
     * Open-Addressing
