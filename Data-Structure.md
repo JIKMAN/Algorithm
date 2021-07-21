@@ -107,7 +107,7 @@ print(queue) # 큐 출력
 >>>  A
 >>>  deque(['B'])
 ```
-![큐](./img/queue.PNG)
+![queue](./img/queue.png)
 
 ---
 
