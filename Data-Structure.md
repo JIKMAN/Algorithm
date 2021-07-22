@@ -78,7 +78,9 @@
  그리고 코드의 성능을 분석하거나 최적화 시켜야 될 때나 (성능을 최대로 끌어올리고 싶을 때) **자료 구조**를 중심적으로 생각하면 될 것 같다.
 
  > ### 큐(Queue)
- FIFO(First in First Out)
+FIFO(First in First Out)
+
+먼저 들어가는 데이터가 먼저 나오는 입구 출구가 따로 있는 원통 형태
 
 맨 뒤 삽입 + 맨 앞 접근 및 삭제 기능이 필요하다.
 
@@ -86,7 +88,7 @@
 
 파이썬의 deque는 더블리 링크드로 구현되어 있다.
 
-```
+```python
 from collections import deque
 
 queue = deque()
@@ -113,11 +115,13 @@ print(queue) # 큐 출력
 
  > ### 스택(Stack)
  LIFO(Last in First Out)
+ 
+ 나중에 들어간 데이터가 가장 먼저 나오는 입구와 출구가 같은 형태
 
 맨 뒤 삽입 + 맨 뒤 접근 및 삭제 기능이 필요하다.
 
 따라서 큐와 마찬가지로 더블리 링크드 리스트를 이용하는 것이 효율적이다.
-```
+```python
 from collections import deque
 
 stack = []
@@ -158,7 +162,7 @@ Stack은 동적 배열과 더블리 링크드 리스트 둘 다로 구현할 수
 > ### 딕셔너리(Dictionary)
 해시 테이블을 이용하여 구현
 
-```
+```python
 fruits = {}
 
 fruits["사과"] = 500
@@ -184,7 +188,7 @@ print(fruits)
 > ### 세트(Set)
 데이터간의 순서가 없는 추상자료형, 해시 테이블을 이용하여 구현
 
-```
+```python
 contries = set()
 
 # 데이터 저장
