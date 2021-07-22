@@ -24,7 +24,7 @@
 
 
 * [큐](https://github.com/JIKMAN/Algorithm/blob/master/Data_Structure/README.md)
-    * 우선순위 큐
+    * 일반 큐
     * 원형 큐
 
 
