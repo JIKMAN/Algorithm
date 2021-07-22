@@ -20,10 +20,10 @@
     * 해시 충돌
     * Chaining
     * Open-Addressing
-* [스택](https://github.com/JIKMAN/Algorithm/blob/master/Data-Structure.md)
+* [스택](https://github.com/JIKMAN/Algorithm/blob/master/Data_Structure/README.md)
 
 
-* [큐](https://github.com/JIKMAN/Algorithm/blob/master/Data-Structure.md)
+* [큐](https://github.com/JIKMAN/Algorithm/blob/master/Data_Structure/README.md)
     * 우선순위 큐
     * 원형 큐
 
