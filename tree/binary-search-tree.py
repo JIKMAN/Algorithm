@@ -9,19 +9,16 @@ class TreeNode():
 memory = []
 root = None
 
-
-## 실제 데이터
+## 이진트리로 만들 배열
 nameArray = ['블랙핑크', '레드벨벳', '마마무', '에이핑크', '걸스데이', '트와이스']
 
-
-# Main
-# 첫 노드 생성
+# 루트 노드 생성
 node = TreeNode()
 node.data = nameArray[0]
 root = node
 memory.append(root)
 
-# 이진 탐색 트리 구현
+```이진 탐색 트리 구현```
 for name in nameArray[1:]:
     node = TreeNode()
     node.data = name
@@ -32,12 +29,12 @@ for name in nameArray[1:]:
             if current.left == None:
                 current.left = node
                 break
-            current = current.left
+            current = current.left # 왼쪽에 이미 있으면 다시 비교
         else:
             if current.right == None:
                 current.right = node
                 break
-            current = current.right
+            current = current.right # 오른쪽에 이미 있으면 다시 비교
 
     memory.append(node)
 
@@ -45,7 +42,7 @@ print('이진 탐색 트리 구성 완료')
 
 ## 데이터를 탐색할 때 완전 효율적
 
-findlist = ['마마무', '에스파']
+findlist = ['마마무', '에스파'] # 찾을 이름
 for i in findlist:
     findName = i
 

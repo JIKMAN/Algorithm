@@ -123,7 +123,7 @@ print(queue) # 큐 출력
 
 #### 원형 큐 원리
 
-* 원형 큐가 빈 경우 : front == rare
+* 원형 큐가 빈 경우 : `front == rare`
 
   ![image-20210722134028901](../img/image-20210722134028901.png)
 
@@ -133,10 +133,20 @@ print(queue) # 큐 출력
 
 * 원형 큐는 빈 것과 꽉 찬 것을 구별하기 위해 기본적으로 한칸을 비워두게됌
   * 예시) 일반 큐와 다르게 초기 front, rear 값을 index 0으로 설정하여 index 1부터 데이터가 쌓이게 함
+  
 * 데이터 삽입 시 : `rear = (rear + 1) % (큐의 SIZE)`
+
+  * 선형 큐의 경우 데이터 삽입 시 출구쪽이 비어있다면 데이터를 한칸씩 땡겨와야 하기 때문에 삽입에 O(n)의 시간복잡도가 걸리는 반면,
+
+    원형 큐의 경우 데이터의 위치와 관계없이 O(1)
+
 * 데이터 추출 시 : `front = (front + 1) % (큐의 SIZE)`
 
 #### [원형 큐 구현 바로가기]((https://github.com/JIKMAN/Algorithm/blob/master/Data_Structure/rounded_queue.py))
+
+---
+
+
 
  > ### 스택(Stack)
 
