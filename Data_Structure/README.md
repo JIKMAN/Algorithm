@@ -46,7 +46,7 @@
 * 동적 배열 : 크기가 요소의 갯수만큼 자동으로 늘어나는 배열
     * 공간을 낭비할 수도 안할 수도 있다.
 
-![배열비교](./img/배열비교.PNG)
+![배열비교](../img/배열비교.PNG)
 
 ---
 ## __추상자료형__
@@ -88,6 +88,7 @@ FIFO(First in First Out)
 
 파이썬의 deque는 더블리 링크드로 구현되어 있다.
 
+
 ```python
 from collections import deque
 
@@ -109,7 +110,9 @@ print(queue) # 큐 출력
 >>>  A
 >>>  deque(['B'])
 ```
-![queue](./img/queue.png)
+![queue](../img/queue.png)
+
+* [큐 추상자료형 구현 이동](https://github.com/JIKMAN/Algorithm/blob/master/Data_Structure/Queue.py)
 
 ---
 
@@ -145,16 +148,13 @@ print(stack) # 스택 출력
 
 Stack은 동적 배열과 더블리 링크드 리스트 둘 다로 구현할 수 있다.
 
+* [스택 추상자료형 구현 이동](https://github.com/JIKMAN/Algorithm/blob/master/Data_Structure/Stack.py)
+
 |            | 동적배열       | 링크드 리스트 |
 | ---------- | -------------- | ------------- |
 | 맨 뒤 삭제 | 분할 상환 O(1) | O(1)          |
 | 맨 뒤 삽입 | 분할 상환 O(1) | O(1)          |
 | 맨 앞 접근 | O(1)           | O(1)          |
-
-
-
-
-
 
 
 ---
@@ -180,7 +180,7 @@ print(fruits)
 >>>  500
 >>>  {'사과': 500, '배': 700}
 ```
-![딕셔너리](./img/딕셔너리.PNG)
+![딕셔너리](../img/딕셔너리.PNG)
 
 
 ---
@@ -207,7 +207,7 @@ print(contries)
 >>>  True
 >>>  {'미국', '중국', '한국'}
 ```
-![세트](./img/세트.PNG)
+![세트](../img/세트.PNG)
 
 ---
 
