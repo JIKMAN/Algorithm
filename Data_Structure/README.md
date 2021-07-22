@@ -112,13 +112,36 @@ print(queue) # 큐 출력
 ```
 ![queue](../img/queue.png)
 
-* [큐 추상자료형 구현 이동](https://github.com/JIKMAN/Algorithm/blob/master/Data_Structure/Queue.py)
+* [큐 추상자료형 구현 바로가기](https://github.com/JIKMAN/Algorithm/blob/master/Data_Structure/Queue.py)
 
----
+> ### 원형 큐
+
+* 일반큐는 큐가 꽉 찼을 경우, 데이터 삽입 시 데이터를 한칸 씩 끌어와야 하므로 오버헤드가 발생하는 문제점이 있음.
+* 원형 큐는 데이터 삽입 시오버헤드가 발생하지 않음
+
+![원형큐](../img/rounded-queue.PNG)
+
+#### 원형 큐 원리
+
+* 원형 큐가 빈 경우 : front == rare
+
+  ![image-20210722134028901](../img/image-20210722134028901.png)
+
+* 원형 큐가 꽉 찬 경우 : `if (rear +1) % (큐의 SIZE)  == front`
+
+  ![image-20210722134201792](../img/image-20210722134201792.png)
+
+* 원형 큐는 빈 것과 꽉 찬 것을 구별하기 위해 기본적으로 한칸을 비워두게됌
+  * 예시) 일반 큐와 다르게 초기 front, rear 값을 index 0으로 설정하여 index 1부터 데이터가 쌓이게 함
+* 데이터 삽입 시 : `rear = (rear + 1) % (큐의 SIZE)`
+* 데이터 추출 시 : `front = (front + 1) % (큐의 SIZE)`
+
+#### [원형 큐 구현 바로가기]((https://github.com/JIKMAN/Algorithm/blob/master/Data_Structure/rounded_queue.py))
 
  > ### 스택(Stack)
+
  LIFO(Last in First Out)
- 
+
  나중에 들어간 데이터가 가장 먼저 나오는 입구와 출구가 같은 형태
 
 맨 뒤 삽입 + 맨 뒤 접근 및 삭제 기능이 필요하다.
@@ -148,7 +171,7 @@ print(stack) # 스택 출력
 
 Stack은 동적 배열과 더블리 링크드 리스트 둘 다로 구현할 수 있다.
 
-* [스택 추상자료형 구현 이동](https://github.com/JIKMAN/Algorithm/blob/master/Data_Structure/Stack.py)
+* [스택 추상자료형 구현 바로가기](https://github.com/JIKMAN/Algorithm/blob/master/Data_Structure/Stack.py)
 
 |            | 동적배열       | 링크드 리스트 |
 | ---------- | -------------- | ------------- |
