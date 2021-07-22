@@ -29,13 +29,13 @@
 
 
 
-### 비선형 자료구조
+### [비선형 자료구조](https://github.com/JIKMAN/Algorithm/tree/master/tree-heap-graph)
 
 * 트리
 
-* 그래프
-
 * 힙
+
+* 트리
 
 ## 알고리즘
 * 재귀
