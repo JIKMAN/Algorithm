@@ -1,3 +1,4 @@
+![sort](https://user-images.githubusercontent.com/79182924/126745366-187cbbcc-993d-469d-aa42-59d44ab24f49.PNG)
 # 알고리즘
 
 - 탐색 알고리즘
@@ -468,13 +469,15 @@ for i in range(len(arr)):
 
 ## 정렬 알고리즘 비교
 
-![정렬비교.png](../img/sort.png)
+![sort](https://user-images.githubusercontent.com/79182924/126745375-2a954bd4-4dd9-4760-bd62-7832429529b1.PNG)
+
 
 ---
 
 ## 시간복잡도 비교
 
-![시간 복잡도](../img/timecomplex.PNG)
+![timecomplex](https://user-images.githubusercontent.com/79182924/126745386-848c3329-55c0-4286-a9a6-03cf4950b759.PNG)
+
 
 
 
