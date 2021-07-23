@@ -48,4 +48,4 @@
 ## 알고리즘
 * [탐색 알고리즘](https://github.com/JIKMAN/Algorithm/tree/master/sort)
 * [정렬 알고리즘](https://github.com/JIKMAN/Algorithm/tree/master/sort)
-* 재귀 함수
+* [재귀 함수](https://github.com/JIKMAN/Algorithm/blob/master/recursive.md)
