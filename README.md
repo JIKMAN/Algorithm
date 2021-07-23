@@ -46,6 +46,6 @@
 * 그래프
 
 ## 알고리즘
-* 정렬
-* 탐색
-* 재귀
+* [탐색 알고리즘](https://github.com/JIKMAN/Algorithm/tree/master/sort)
+* [정렬 알고리즘](https://github.com/JIKMAN/Algorithm/tree/master/sort)
+* 재귀 함수
