@@ -1,4 +1,3 @@
-![sort](https://user-images.githubusercontent.com/79182924/126745366-187cbbcc-993d-469d-aa42-59d44ab24f49.PNG)
 # 알고리즘
 
 - 탐색 알고리즘
