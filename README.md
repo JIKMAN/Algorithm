@@ -24,7 +24,7 @@
 
 
 * [큐](https://github.com/JIKMAN/Algorithm/blob/master/Data_Structure/README.md)
-    * 일반 큐
+    * 선형 큐
     * 원형 큐
 
 
@@ -32,12 +32,14 @@
 ### [비선형 자료구조](https://github.com/JIKMAN/Algorithm/tree/master/tree-heap-graph)
 
 * 트리
-
+  * 이진 탐색 트리
+  * 완전 이진 트리
 * 힙
-
-* 트리
+  * 힙정렬
+  * 우선순위 큐
+* 그래프
 
 ## 알고리즘
-* 재귀
 * 정렬
-* 검색
+* 탐색
+* 재귀

@@ -4,8 +4,6 @@ class Graph():
         self.SIZE = size
         self.graph = [[0 for _ in range(size)] for _ in range(size)]
 
-
-
 ## 전역
 A, B, C, D = 0, 1, 2, 3
 
