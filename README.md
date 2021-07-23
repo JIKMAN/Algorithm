@@ -1,12 +1,12 @@
 \# 제목을 누르면 해당 페이지로 이동합니다.
 
-## [자료구조](https://github.com/JIKMAN/Algorithm/blob/master/Data-Structure.md)
+## [자료구조](https://github.com/JIKMAN/Algorithm/tree/master/Data_Structure)
 
 * 스토리지 vs 메모리
 * 배열
     * 정적배열 vs 동적배열
 
-## [추상 자료형](https://github.com/JIKMAN/Algorithm/blob/master/Data-Structure.md)
+## [추상 자료형](https://github.com/JIKMAN/Algorithm/tree/master/Data_Structure)
 
 * 추상 자료형 vs 자료 구조
 * 추상 자료형 실행속도 비교
