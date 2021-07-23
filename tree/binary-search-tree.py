@@ -16,7 +16,6 @@ nameArray = ['블랙핑크', '레드벨벳', '마마무', '에이핑크', '걸�
 node = TreeNode()
 node.data = nameArray[0]
 root = node
-memory.append(root)
 
 
 # 이진 탐색 트리 구현
@@ -37,7 +36,6 @@ for name in nameArray[1:]:
                 break
             current = current.right # 오른쪽에 이미 있으면 다시 비교
 
-    memory.append(node)
 
 print('이진 탐색 트리 구성 완료')
 
