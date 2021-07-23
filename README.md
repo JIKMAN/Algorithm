@@ -1,4 +1,10 @@
+## Repository For Studying Algorithm
+
+\# 알고리즘에 대해 공부한 내용을 정리한 레포지토리 입니다.
+
 \# 제목을 누르면 해당 페이지로 이동합니다.
+
+\# 업데이트 중입니다.
 
 ## [자료구조](https://github.com/JIKMAN/Algorithm/tree/master/Data_Structure)
 
@@ -29,7 +35,7 @@
 
 
 
-### [비선형 자료구조](https://github.com/JIKMAN/Algorithm/tree/master/tree-heap-graph)
+### 비선형 자료구조
 
 * 트리
   * 이진 탐색 트리
