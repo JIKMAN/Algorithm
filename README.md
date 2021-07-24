@@ -37,13 +37,13 @@
 
 ### 비선형 자료구조
 
-* 트리
+* [트리](https://github.com/JIKMAN/Algorithm/tree/master/tree-heap-graph)
   * 이진 탐색 트리
   * 완전 이진 트리
-* 힙
+* [힙](https://github.com/JIKMAN/Algorithm/tree/master/tree-heap-graph)
   * 힙정렬
   * 우선순위 큐
-* 그래프
+* [그래프](https://github.com/JIKMAN/Algorithm/tree/master/tree-heap-graph)
 
 ## 알고리즘
 * [탐색 알고리즘](https://github.com/JIKMAN/Algorithm/tree/master/sort)
