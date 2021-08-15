@@ -4,8 +4,6 @@
 
 \# 제목을 누르면 해당 페이지로 이동합니다.
 
-\# 업데이트 중입니다.
-
 ## [자료구조](https://github.com/JIKMAN/Algorithm/tree/master/Data_Structure)
 
 * 스토리지 vs 메모리
