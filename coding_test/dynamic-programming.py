@@ -89,7 +89,7 @@ X = 23
 print(solution3(X))
 
 # 4
-
+# 주어진 리스트의 숫자 요소로, 값을 나눴을 때 가장 적은 횟수로 나누는 조합은? 
 
 money = [2, 3, 5]
 price = 32
@@ -110,3 +110,39 @@ def solution4(money, price):
         print(d[price])
 
 solution4(money, price)
+
+# 5
+# 금광문제
+# 합이 가장 큰 경로의 합의 값을 구하기
+# 단 건너 뛸 수 없고 이어지는 구간만 건널 수 있다.
+
+mine_exam1 = [[1, 3, 3, 2], 
+              [2, 1, 4, 1],
+              [0, 6, 4, 7]]
+
+mine_exam2 = [[1, 3, 1, 5, 5],
+              [2, 2, 4, 1, 2],
+              [5, 0, 2, 3, 1],
+              [0, 6, 1, 2, 2]]
+
+def solution5(mine):
+    d = [[0 for c in range(len(mine[0]))] for r in range(len(mine))]
+    
+    for n in range(len(mine)):
+        d[n][0] = mine[n][0]
+    
+    for i in range(1, len(mine[0])):
+        for j in range(len(mine) - 1):
+            if j == 0:
+                d[j][i] = mine[j][i] + max(d[j][i - 1], d[j + 1][i - 1])
+            elif j == len(mine) - 1:
+                d[j][i] = mine[j][i] + max(d[j][i - 1], d[j - 1][i - 1])
+            else:
+                d[j][i] = mine[j][i] + max(d[j][i - 1], d[j - 1][i - 1], d[j + 1][i - 1])
+    max_v = 0        
+    for x in range(len(mine)):
+        if d[x][-1] > max_v:
+            max_v = d[x][-1]
+    return max_v
+
+print(solution5(mine_exam2))
