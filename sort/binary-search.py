@@ -23,7 +23,7 @@ findData = 160 # 찾아야되는 키
 
 
 ## Main
-print('dataAry')
+print(dataAry)
 position = binSearch(dataAry, findData)
 if position == -1:
     print('없다.')
