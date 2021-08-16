@@ -87,3 +87,26 @@ X = 18
 print(solution3(X))
 X = 23
 print(solution3(X))
+
+# 4
+
+
+money = [2, 3, 5]
+price = 32
+
+def solution4(money, price):
+    # 계산 불가능하면 -1
+    
+    d = [1001] * (price + 1)
+    
+    d[0] = 0
+    for m in money:
+        for j in range(m, price + 1):
+            if d[j - m] != 1001:
+                d[j] = min(d[j], d[j - m] + 1)
+    if d[price] == 101:
+        print(-1)
+    else:
+        print(d[price])
+
+solution4(money, price)
