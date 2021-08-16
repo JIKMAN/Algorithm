@@ -1,3 +1,4 @@
+# 문제 1
 # 주어진 삼각형 경로의 최대값 찾기
 
 triangle = [[7],
@@ -22,3 +23,28 @@ def solution(tri):
     return max(d[-1])
 
 print(solution(triangle))
+
+# 문제 2
+# m x n의 배열에서 지나갈 수 없는 좌표를 담은 2차원 배열 puddles을 피해
+# 갈 수 있는 최단경로의 개수
+
+m = 4
+n = 3
+puddles = [[2, 2]]
+
+def solution2(m, n, pud):
+    d = [[0] * m for _ in range(n)]
+    d[0][0] = 1
+    for i in range(n):
+        for j in range(m):
+            if i == 0 and j == 0:
+                continue
+
+            if [j + 1, i + 1] in pud:
+                d[i][j] = 0
+            else:
+                d[i][j] = d[i-1][j] + d[i][j-1]
+    return d[n-1][m-1]
+
+print(solution2(m,n,puddles))
+
