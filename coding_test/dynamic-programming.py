@@ -146,3 +146,26 @@ def solution5(mine):
     return max_v
 
 print(solution5(mine_exam2))
+
+# 6
+# 병사 배치하기
+# 배열안의 병사를 열외해 가면서
+# 남아있는 배열이 내림차순이 될 때
+# 남아있는 배열이 가장 긴 배열이 되게 만드는
+# 최소 열외인원을 출력하는 함수
+
+array = [15, 11, 4, 8, 5, 2, 4]
+
+def solution6(array):
+    # 배열의 길이를 1로 초기화
+    d = [1] * len(array)
+    # [1, 1, 1, 1, 1, 1, 1]
+    array.reverse()
+
+    for i in range(1, len(array)):
+        for j in range(0, i):
+            if array[i] > array[j]:
+                d[i] = max(d[i], d[j] + 1)
+    return len(array) - max(d)
+
+print(solution6(array))
