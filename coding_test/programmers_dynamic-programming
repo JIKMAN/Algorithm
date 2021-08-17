@@ -24,7 +24,7 @@ def solution(tri):
 
 print(solution(triangle))
 
-# 문제 2
+# 문제 2 - 등굣길
 # m x n의 배열에서 지나갈 수 없는 좌표를 담은 2차원 배열 puddles을 피해
 # 갈 수 있는 최단경로의 개수
 

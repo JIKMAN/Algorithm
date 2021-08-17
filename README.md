@@ -42,6 +42,8 @@
   * 힙정렬
   * 우선순위 큐
 * [그래프](https://github.com/JIKMAN/Algorithm/tree/master/tree-heap-graph)
+  * BFS, DFS
+  * 최단경로
 
 ## 알고리즘
 * [탐색 알고리즘](https://github.com/JIKMAN/Algorithm/tree/master/sort)
