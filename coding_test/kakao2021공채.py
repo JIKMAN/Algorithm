@@ -175,6 +175,8 @@ def solution3(cities, cacheSize):
 # cities6 = ['Jeju', 'Pangyo', 'Seoul', 'NewYork', 'LA']  
 # print(solution3(cities6, cachSize))
 
+
+
 ## 4
 
 # 09:00시 부터 n회 t분 마다 m명 탈수있음
@@ -182,7 +184,7 @@ def solution3(cities, cacheSize):
 
 # 하루 동안 크루가 대기열에 도착하는 시각
 
-
+## 으아... 답이 안나오네... pass
 
 '''
 1. 탑승자 timetable 숫자로 변환
@@ -256,7 +258,7 @@ timetable = ['08:00', '08:01', '08:02', '08:03', '09:02']
 # print(solution4(1,1,5, timetable))
 
 
-## 으아... pass
+
 
 ## 5
 
@@ -381,7 +383,62 @@ def solution6(board):
 
     return cnt
 
-print(solution6(board))
+# print(solution6(board))
 
 board = ['CCBDE', 'AAADE', 'AAABF', 'CCBBF']
-print(solution6(board))
+# print(solution6(board))
+
+
+## 7
+
+# 임의 시간부터 1초간 처리하는 요청의 최대 개수
+# line 배열 = (1~2000)개의 로그 문자열 S : 응답 완료시간, T: 처리시간
+# S는 고정길이의 timestamp 형식으로 되어있다.
+# T는 최대 소수점 셋째자리로 구성된 초 단위 0.000s
+# 처리시간은 0.001 ~ 3.000
+
+## 포기 ......
+
+data = ['2016-09-15 01:00:04.001 2.0s', '2016-09-15 01:00:07.000 2s']
+
+def solution7(data):
+    new_data = []
+    for d in data:
+        d = [d[11:13] +d[14:16] + d[17:19] + d[20:23], d[24] + d[26:-1]]
+        while len(d[1]) != 4:
+            d[1] += '0'
+        tmp = int(d[1])
+        d[1] = int(d[0])
+        d[0] = int(d[0]) - tmp + 1
+        d = [d[0], d[1]]
+        new_data.append(d)
+
+    result = 0
+    big = 0
+    small = 1000000000
+    for i in range(len(new_data)):
+        if new_data[i][1] > big:
+            big = new_data[i][1]
+        if new_data[i][0] < small:
+            small = new_data[i][0]
+
+    time = [0 for i in range(big - small + 1)]
+
+    for i in range(len(time)+1):
+        for j in range(len(new_data)):
+            if new_data[j][0] - small <= i and new_data[j][1] - small >= i:
+                time[i] += 1
+    print(new_data)
+    print(small)
+    print(len(time))
+
+    for i in range(len(time))
+    return max(time)
+
+    # print(len(time))
+    # print(new_data)
+
+print(solution7(data))
+data = [ '2016-09-15 01:00:04.002 2.0s', '2016-09-15 01:00:07.000 2s']
+print(solution7(data))
+
