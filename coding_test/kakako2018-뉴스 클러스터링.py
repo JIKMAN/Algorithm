@@ -29,7 +29,7 @@ def make_dic(str1):
         tmp_list.append(str1[i:(i+2)].upper())
 
     count_dic = Counter(tmp_list)
-
+    
     return count_dic
 
 

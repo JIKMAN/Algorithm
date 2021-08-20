@@ -45,7 +45,7 @@ test_arr2 = [27 ,56, 19, 14, 14, 10]
 
 
 
-## 2 엄청 지저분하지만.. 일단 답은 맞음.. 50분 소요
+## 2 엄청 지저분하지만.. 일단 답은 맞음.. 60분 소요
 
 dart = '1S2D*3T'
 dart2 = '1D2S#10S'
@@ -130,6 +130,7 @@ def solution2(dart):
 ## 3 - 얘도 답은 나왔음.. 30분
 
 from collections import deque
+from re import template
 
 def solution3(cities, cacheSize):
     result = 0
@@ -150,27 +151,237 @@ def solution3(cities, cacheSize):
             result += 1
     return result
     
-cachSize = 3
-cities = ['Jeju', 'Pangyo', 'Seoul', 'NewYork', 'LA', 'Jeju', 'Pangyo', 'Seoul', 'NewYork', 'LA']
-print(solution3(cities, cachSize))
+# cachSize = 3
+# cities = ['Jeju', 'Pangyo', 'Seoul', 'NewYork', 'LA', 'Jeju', 'Pangyo', 'Seoul', 'NewYork', 'LA']
+# print(solution3(cities, cachSize))
 
-cachSize = 3
-cities2 = ['Jeju', 'Pangyo', 'Seoul', 'Jeju', 'Pangyo', 'Seoul', 'Jeju', 'Pangyo', 'Seoul']
-print(solution3(cities2, cachSize))
+# cachSize = 3
+# cities2 = ['Jeju', 'Pangyo', 'Seoul', 'Jeju', 'Pangyo', 'Seoul', 'Jeju', 'Pangyo', 'Seoul']
+# print(solution3(cities2, cachSize))
 
-cachSize = 2
-cities3 = ['Jeju', 'Pangyo', 'Seoul', 'NewYork', 'LA', 'SanFrancisco', 'Seoul', 'Rome', 'Paris', 'Jeju', 'NewYork', 'Rome']
-print(solution3(cities3, cachSize))
+# cachSize = 2
+# cities3 = ['Jeju', 'Pangyo', 'Seoul', 'NewYork', 'LA', 'SanFrancisco', 'Seoul', 'Rome', 'Paris', 'Jeju', 'NewYork', 'Rome']
+# print(solution3(cities3, cachSize))
 
-cachSize = 5
-cities4 = ['Jeju', 'Pangyo', 'Seoul', 'NewYork', 'LA', 'SanFrancisco', 'Seoul', 'Rome', 'Paris', 'Jeju', 'NewYork', 'Rome']
-print(solution3(cities4, cachSize))
+# cachSize = 5
+# cities4 = ['Jeju', 'Pangyo', 'Seoul', 'NewYork', 'LA', 'SanFrancisco', 'Seoul', 'Rome', 'Paris', 'Jeju', 'NewYork', 'Rome']
+# print(solution3(cities4, cachSize))
 
-cachSize = 2
-cities5 = ['Jeju', 'Pangyo', 'NewYork', 'newyork']
-print(solution3(cities5, cachSize))
+# cachSize = 2
+# cities5 = ['Jeju', 'Pangyo', 'NewYork', 'newyork']
+# print(solution3(cities5, cachSize))
 
-cachSize = 0
-cities6 = ['Jeju', 'Pangyo', 'Seoul', 'NewYork', 'LA']  
-print(solution3(cities6, cachSize))
+# cachSize = 0
+# cities6 = ['Jeju', 'Pangyo', 'Seoul', 'NewYork', 'LA']  
+# print(solution3(cities6, cachSize))
 
+## 4
+
+# 09:00시 부터 n회 t분 마다 m명 탈수있음
+# 셔틀을 타고 갈수있는 도착 시간 중 제일 늦은 시간
+
+# 하루 동안 크루가 대기열에 도착하는 시각
+
+
+
+'''
+1. 탑승자 timetable 숫자로 변환
+2. 버스 리스트 해시 테이블 {bus1 : [], bus2 : []}
+2. 숫자 변환 clock 함수
+4. 버스 목록에서 popleft, 버스 리스트 승객 꽉찼으면 다음 버스 목록 popleft
+   자리가 남아 있으면 제일 마지막 사람과 같은 시간
+   마지막 버스까지 자리가 꽉차있으면 제일 마지막 사람 시간 -1분
+'''
+
+
+from collections import deque
+
+def clock(pre, t): # 시간 구하는 함수
+    hour = pre // 100
+    min = pre % 100
+
+    if min + t >= 60:
+        hour += (min + t) // 60
+        min = (min + t) % 60
+    else:
+        min = min + t
+    cur_time = hour * 100 + min
+
+    return cur_time
+
+
+def solution4(n, t, m, timetable):
+
+    for i in range(len(timetable)):
+        timetable[i] = int(timetable[i][:2]+timetable[i][3:])
+    timetable.sort()
+    timetable = deque(timetable)
+
+    bus_dic = {}
+    bus_list = deque()
+    depart_time = 900
+    for i in range(n): 
+        bus_dic[depart_time] = []
+        bus_list.append(depart_time)
+        depart_time = clock(depart_time, m)
+
+
+    answer = 0
+    while bus_list:
+        if len(timetable) == 0:
+            break
+        tmp = bus_list.popleft()
+        while timetable:
+            if len(bus_dic[tmp]) < m and tmp >= timetable[0]:
+                person = timetable.popleft()
+                bus_dic[tmp].append(person)
+            else:
+                break
+        
+        if len(bus_list) == 0:
+            last_bus = max(bus_dic.keys())
+            last_person = max(bus_dic[last_bus])
+            # 모든 버스 자리 꽉찬경우
+            if bus_dic[last_bus] == m:
+                answer = clock(last_person, -1)
+            else:
+                answer = last_bus     
+        # 버스 자리 남은 경우
+        else:
+            answer = max(bus_list)
+
+    return answer
+
+timetable = ['08:00', '08:01', '08:02', '08:03', '09:02']
+# print(solution4(1,1,5, timetable))
+
+
+## 으아... pass
+
+## 5
+
+from collections import Counter
+
+def make_dic(str1):
+    str_list = []
+    
+    for i in range(len(str1)-1):
+        if str1[i].isalpha() == False or str1[i+1].isalpha() == False:
+            continue
+        str_list.append(str1[i:(i+2)].upper())
+
+    str_dic = Counter(str_list)
+
+    return str_dic
+
+def solution5(str1, str2):
+    whole = 0
+    part = 0
+
+    first_dic = make_dic(str1)
+    second_dic = make_dic(str2)
+
+    for str in first_dic:
+        if str in second_dic:
+            whole += max(first_dic[str], second_dic[str])
+            part += min(first_dic[str], second_dic[str])
+        else:
+            whole += first_dic[str]
+    
+    for str in second_dic:
+        if str not in first_dic:
+            whole += second_dic[str]
+
+    if whole == 0:
+        similarity = 65536
+    else:
+        similarity = int(part / whole * 65536)
+
+
+    return similarity
+
+# str1 = "FRANCE"
+# str2 = "french"
+# print(solution5(str1, str2))
+
+# str1 = "handshake"
+# str2 = "shake hands"
+# print(solution5(str1, str2))
+
+# str1 = "aa1+aa2"
+# str2 = "AAAA12"
+# print(solution5(str1, str2))
+
+# str1 = "E=M*C^2"
+# str2 = "e=m*c^2"
+# print(solution5(str1, str2))
+
+
+## 6 
+# 1시간 20분 걸림............. 성공하긴 했는데 많이 지저분 함...
+# 다른 풀이 보고 업데이트 해야겠음
+
+m = 6
+n = 6
+board = ['TTTANT', 'RRFACC', 'RRRFCC', 'TRRRAA', 'TTMMMF', 'TMMTTJ']
+
+def pang(board):
+    idx = []
+    for i in range(len(board)-1):
+        for j in range(len(board[0])-1):
+            if board[i][j] == board[i+1][j] and board[i][j] == board[i][j+1] and board[i][j] == board[i+1][j+1]:
+                idx.append([i,j])
+    if len(idx) == 0:
+        return False
+
+    for i in range(len(idx)):
+        a = idx[i][0]
+        b = idx[i][1]
+
+        board[a][b], board[a][b+1], board[a+1][b], board[a+1][b+1] = 0,0,0,0
+    
+    temp_board = []
+    for i in range(len(board[0])):
+        temp_list = []
+        for j in range(len(board)):
+            temp_list.append(board[j][i])
+        cnt = 0
+        while 0 in temp_list:
+            temp_list.remove(0)
+            cnt += 1
+        while cnt != 0:
+            temp_list.insert(0, 0)
+            cnt -= 1
+        temp_board.append(temp_list)
+
+    for i in range(len(temp_board)):
+        for j in range(len(temp_board[0])):
+            board[j][i] = temp_board[i][j]
+
+    return board
+
+def last_pang(board):
+    
+    board = [list(b) for b in board]
+
+
+    while not False:
+        answer = pang(board)
+        return pang(answer)
+    
+
+def solution6(board):
+    last = last_pang(board)
+    cnt = 0
+    
+    for i in range(len(last)):
+        for j in range(len(last[0])):
+            if last[i][j] == 0:
+                cnt += 1
+
+    return cnt
+
+print(solution6(board))
+
+board = ['CCBDE', 'AAADE', 'AAABF', 'CCBBF']
+print(solution6(board))
