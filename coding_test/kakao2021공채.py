@@ -389,7 +389,7 @@ board = ['CCBDE', 'AAADE', 'AAABF', 'CCBBF']
 # print(solution6(board))
 
 
-## 7
+## 7 추석 트래픽
 
 # 임의 시간부터 1초간 처리하는 요청의 최대 개수
 # line 배열 = (1~2000)개의 로그 문자열 S : 응답 완료시간, T: 처리시간
@@ -402,7 +402,8 @@ board = ['CCBDE', 'AAADE', 'AAABF', 'CCBBF']
 data = ['2016-09-15 01:00:04.001 2.0s', '2016-09-15 01:00:07.000 2s']
 
 def solution7(data):
-    new_data = []
+    start = []
+    end = []
     for d in data:
         d = [d[11:13] +d[14:16] + d[17:19] + d[20:23], d[24] + d[26:-1]]
         while len(d[1]) != 4:
@@ -410,35 +411,46 @@ def solution7(data):
         tmp = int(d[1])
         d[1] = int(d[0])
         d[0] = int(d[0]) - tmp + 1
-        d = [d[0], d[1]]
-        new_data.append(d)
+        start.append(d[0])
+        end.append(d[1])
+    
+    answer = 0
+    for i in range(len(data)):
+        cnt = 0
+        cur_end = end[i]
+        for j in range(i, len(data)):
+            if cur_end > start[j] - 1000:
+                cnt += 1
+        answer = max(answer, cnt)
+    return answer    
+    # result = 0
+    # big = 0
+    # small = 1000000000
+    # for i in range(len(new_data)):
+    #     if new_data[i][1] > big:
+    #         big = new_data[i][1]
+    #     if new_data[i][0] < small:
+    #         small = new_data[i][0]
+    # print(new_data)
+    # time = [0 for i in range(big - small + 1)]
 
-    result = 0
-    big = 0
-    small = 1000000000
-    for i in range(len(new_data)):
-        if new_data[i][1] > big:
-            big = new_data[i][1]
-        if new_data[i][0] < small:
-            small = new_data[i][0]
+    # for i in range(len(time) - 1000):
+    #     for j in range(len(new_data)):
+    #         front = new_data[j][0] - small
+    #         back = new_data[j][1] - small
+    #         if back <= i or front > i + 1000:
+    #             continue
+    #         else:
+    #             time[i] += 1
 
-    time = [0 for i in range(big - small + 1)]
-
-    for i in range(len(time)+1):
-        for j in range(len(new_data)):
-            if new_data[j][0] - small <= i and new_data[j][1] - small >= i:
-                time[i] += 1
-    print(new_data)
-    print(small)
-    print(len(time))
-
-    for i in range(len(time))
-    return max(time)
+    # return max(time)
 
     # print(len(time))
     # print(new_data)
 
 print(solution7(data))
 data = [ '2016-09-15 01:00:04.002 2.0s', '2016-09-15 01:00:07.000 2s']
+print(solution7(data))
+data = [ '2016-09-15 20:59:57.421 0.351s', '2016-09-15 20:59:58.233 1.181s', '2016-09-15 20:59:58.299 0.8s', '2016-09-15 20:59:58.688 1.041s', '2016-09-15 20:59:59.591 1.412s', '2016-09-15 21:00:00.464 1.466s', '2016-09-15 21:00:00.741 1.581s', '2016-09-15 21:00:00.748 2.31s', '2016-09-15 21:00:00.966 0.381s', '2016-09-15 21:00:02.066 2.62s' ]
 print(solution7(data))
 
