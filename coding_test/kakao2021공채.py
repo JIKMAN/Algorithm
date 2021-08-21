@@ -422,31 +422,7 @@ def solution7(data):
             if cur_end > start[j] - 1000:
                 cnt += 1
         answer = max(answer, cnt)
-    return answer    
-    # result = 0
-    # big = 0
-    # small = 1000000000
-    # for i in range(len(new_data)):
-    #     if new_data[i][1] > big:
-    #         big = new_data[i][1]
-    #     if new_data[i][0] < small:
-    #         small = new_data[i][0]
-    # print(new_data)
-    # time = [0 for i in range(big - small + 1)]
-
-    # for i in range(len(time) - 1000):
-    #     for j in range(len(new_data)):
-    #         front = new_data[j][0] - small
-    #         back = new_data[j][1] - small
-    #         if back <= i or front > i + 1000:
-    #             continue
-    #         else:
-    #             time[i] += 1
-
-    # return max(time)
-
-    # print(len(time))
-    # print(new_data)
+    return answer
 
 print(solution7(data))
 data = [ '2016-09-15 01:00:04.002 2.0s', '2016-09-15 01:00:07.000 2s']

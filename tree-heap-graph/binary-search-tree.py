@@ -18,7 +18,7 @@ node.data = nameArray[0]
 root = node
 memory.append(root)
 
-```이진 탐색 트리 구현```
+'''이진 탐색 트리 구현'''
 for name in nameArray[1:]:
     node = TreeNode()
     node.data = name
