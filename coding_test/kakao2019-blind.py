@@ -233,6 +233,8 @@ for i in range(len(layer)-1, 0, -1):
 # 모든 외부 링크는 <a href=”https://careers.kakao.com/index”>
 # word <= 12, 대문자 구별 x
 
+## 내 코드는 구현이 안되는 테스트가 몇개 있다
+
 import re
 
 
@@ -245,83 +247,156 @@ word = 'blind'
 
 def solution(word, pages):
     page_dic = {}
-    
-    need_to_find = re.compile('Blind', re.I)
-
-    p = re.compile('content="https://')
-    p2 = re.compile('</head>')
-    p_out_front = re.compile('<a href')
-    p_out_back = re.compile('Link to')
 
     for i in range(len(pages)):
-        m = p.search(pages[i])
-        n = p2.search(pages[i])
-        
-        link = pages[i][m.end():(n.start()-4)]
+        link_start = re.search('content="https://', pages[i])
+        link_end = re.search('</head>', pages[i])
+        link = pages[i][link_start.end():(link_end.start()-4)]
         page_dic[link] = [i,0,0,0,0]
 
     for i in range(len(pages)):
-        m = p.search(pages[i])
-        n = p2.search(pages[i])
-        
-        link = pages[i][m.end():(n.start()-4)]
-        
-        result = need_to_find.finditer(pages[i])
-        cnt = 0
-        for r in result:
-            if pages[i][r.end()+1] == " ":
-                cnt += 1
-        page_dic[link][1] += cnt
+        link_start = re.search('content="https://', pages[i])
+        link_end = re.search('</head>', pages[i])
+        link = pages[i][link_start.end():(link_end.start()-4)]
 
-        out_link = p_out_front.finditer(pages[i])
+        m = re.findall(rf'[\d|\s]+({word})[\d|\s]+', pages[i], re.I)
+        page_dic[link][1] = len(m)
+
+        out_link = re.findall('<a href', pages[i])
         for o in out_link:
             page_dic[link][2] += 1
 
         page_dic[link][3] = page_dic[link][1] / page_dic[link][2]
-        
-        front = p_out_front.finditer(pages[i])
-        back = p_out_back.finditer(pages[i])
-        start_span = []
-        end_span = []
-        for f in front:
-            
-            start_span.append(f.end()+10)
-        for b in back:    
-            end_span.append(b.start()-3)
-            
-        other_link = []
-        while len(start_span) != 0:
-            other_link.append(pages[i][start_span.pop():end_span.pop()])
+        page_dic[link][4] += page_dic[link][1]
 
-        for other in other_link:
-            if other in page_dic:
-                page_dic[other][4] += page_dic[link][3]
-                
+        for i in range(len(pages)):
+            outer_link = re.findall(r'<a href="(https://[\S]*)"', pages[i])
+            
+            for o in outer_link:
+                if o in page_dic:
+                    page_dic[o][4] += page_dic[link][3]
+        
     page_list = []
     for page in page_dic:
-        page_dic[page] = [page_dic[page][0], page_dic[page][1]+page_dic[page][4]]
+        page_dic[page] = [page_dic[page][0], page_dic[page][4]]
         page_list.append(page_dic[page])
-
 
     big_idx = max(page_list, key=lambda x: x[1])
 
     return big_idx[0]
 
 
-
-print(solution(word, pages))
-
-
-# # 기본점수 구하기
-# for page in pages:
-#     # m = p.search(page)
-#     # print(m.group())
-#     result = need_to_find.finditer(page)
-#     cnt = 0
-#     for r in result:
-#         cnt += 1
-#     print(cnt)
+# print(solution(word, pages))
 
 
+# 다른것을 참고하여 다시만든 코드 .
 
-# 외부링크 개수 구하기
+import re
+
+def solution(word, pages):
+    webpage = []
+    webpageName = []
+    webpageGraph = dict() # 나를 가리키는 외부 링크
+    
+    for page in pages:
+        url = re.search('<meta property="og:url" content="(\S+)"', page).group(1)
+        basicScore = 0
+        for f in re.findall(r'[a-zA-Z]+', page.lower()):
+            if f == word.lower():
+                basicScore += 1
+        exiosLink = re.findall('<a href="(https://[\S]*)"', page)
+        
+        for link in exiosLink:
+            if link not in webpageGraph.keys():
+                webpageGraph[link] = [url]
+            else:
+                webpageGraph[link].append(url)
+        
+        webpageName.append(url)
+        webpage.append([url, basicScore, len(exiosLink)]) # 내가 가진 외부 링크 (개수)
+        
+    # 링크점수 = 해당 웹페이지로 링크가 걸린 다른 웹페이지의 기본점수 ÷ 외부 링크 수의 총합
+    # 매칭점수 = 기본점수 + 링크점수
+    maxValue = 0
+    result = 0
+    for i in range(len(webpage)):
+        url = webpage[i][0]
+        score = webpage[i][1]
+        
+        if url in webpageGraph.keys():
+            # 나를 가리키는 다른 링크의 기본점수 ÷ 외부 링크 수의 총합을 구하기 위해
+            for link in webpageGraph[url]: 
+                a, b, c = webpage[webpageName.index(link)]
+                score += (b / c)
+        
+        if maxValue < score:
+            maxValue = score
+            result = i
+    
+    return result
+
+
+
+## 7 - 블록게임
+
+# 1. 현재 board에 위에서부터 비어있는 모든 칸에 검은 블록(-1으로 임의 지정)을 채운다.
+# 2. 숫자 4개 + 검은 블록 2개(5가지 경우의 수)로 직사각형이 만들어진 경우 삭제!, count + 1
+
+board = [[0,0,0,0,0,0,0,0,0,0],
+         [0,0,0,0,0,0,0,0,0,0],
+         [0,0,0,0,0,0,0,0,0,0],
+         [0,0,0,0,0,0,0,0,0,0],
+         [0,0,0,0,0,0,4,0,0,0],
+         [0,0,0,0,0,4,4,0,0,0],
+         [0,0,0,0,3,0,4,0,0,0],
+         [0,0,0,2,3,0,0,0,5,5],
+         [1,2,2,2,3,3,0,0,0,5],
+         [1,1,1,0,0,0,0,0,0,5]]
+# 1
+for i in range(len(board[0])):
+    for j in range(len(board)):
+        if board[j][i] == 0:
+            board[j][i] = -1
+        else:
+            break
+
+# 2 - 지울 블록을 찾고 있다면 지우고 없으면 False를 return
+count = 0
+for i in range(len(board)-1):
+    for j in range(len(board[0])):
+        if board[i][j] != -1 and board[i][j] != 0:
+            # j가 맨 앞일 경우 경우의수 2개, 끝일 경우 2개
+            if j == 0:
+                if board[i][j] == board[i][j+1] and board[i+1][j] == -1 and board[i+1][j+1] == -1:
+                    board[i][j], board[i][j+1], board[i][j+2], board[i+1][j+2] = -1, -1, -1, -1
+                    count += 1
+                elif board[i][j] == board[i][j+1] == board[i+1][j+1] == board[i+1][j+2] and board[i+1][j] == -1 and board[i+2][j] == -1:
+                    board[i][j], board[i][j+1], board[i+1][j+1], board[i+1][j+2] == -1, -1, -1, -1
+                    count += 1
+        
+
+            elif j == len(board[0]):
+                if board[i][j] == board[i][j+1] and board[i-1][j] == -1 and board[i-1][j+1] == -1:
+                    board[i][j], board[i][j+1], board[i][j+2], board[i-1][j+2] = -1, -1, -1, -1
+                    count += 1
+                elif board[i][j] == board[i][j+1] == board[i-1][j+1] == board[i-1][j+2] and board[i-1][j] == -1 and board[i-2][j] == -1:
+                    board[i][j], board[i][j+1], board[i-1][j+1], board[i-1][j+2] = -1, -1, -1, -1
+                    count += 1
+            if board[i][j] == board[i][j+1] and board[i+1][j] == -1 and board[i+1][j+1] == -1:
+                board[i][j], board[i][j+1], board[i][j+2], board[i+1][j+2] = -1, -1, -1, -1
+                count += 1
+            elif board[i][j] == board[i][j+1] == board[i+1][j+1] == board[i+1][j+2] and board[i+1][j] == -1 and board[i+2][j] == -1:
+                board[i][j], board[i][j+1], board[i+1][j+1], board[i+1][j+2] == -1, -1, -1, -1
+                count += 1
+            elif board[i][j] == board[i][j+1] and board[i-1][j] == -1 and board[i-1][j+1] == -1:
+                board[i][j], board[i][j+1], board[i][j+2], board[i-1][j+2] = -1, -1, -1, -1
+                count += 1
+            elif board[i][j] == board[i][j+1] == board[i-1][j+1] == board[i-1][j+2] and board[i-1][j] == -1 and board[i-2][j] == -1:
+                board[i][j], board[i][j+1], board[i-1][j+1], board[i-1][j+2] = -1, -1, -1, -1
+                count += 1
+            elif board[i][j] == board[i][j+1] == board[i-1][j+1] == board[i-1][j+1] and board[i-1][j] == -1 and board[i+1][j] == -1:
+                board[i][j], board[i][j+1], board[i-1][j+1], board[i-1][j+1] = -1, -1, -1, -1
+                count += 1
+
+for b in board:
+    print(b)
