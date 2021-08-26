@@ -63,3 +63,31 @@ def lcm(a, b):
     return a * b // math.gcd(a, b)
 
 print(lcm(a, b))
+
+# 플로이드 워셔 알고리즘(완전탐색)
+
+INF = 200 * 100000 + 1
+
+def floyd(dist, n):
+    for k in range(n+1):
+        for i in range(n+1):
+            for j in range(n+1):
+                if dist[i][k] + dist[k][j] < dist[i][j]:
+                    dist[i][j] = dist[i][k] + dist[k][j]
+
+# 배열 회전
+
+key = [(1, 2, 3), (4, 5, 6), (7, 8, 9)]
+
+print(list(zip(*key[::-1])))
+
+print(*key[::-1])
+
+
+# 정규식 치환
+import re
+
+id = 'A-B_?C=;D'
+
+id = re.sub('[\W_]', '.', id)
+print(id)
