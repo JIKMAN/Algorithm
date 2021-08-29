@@ -316,4 +316,105 @@ def solution(n, s, a, b, fares):
 
 
 
-print(solution(n, s, a, b, fares))
+# print(solution(n, s, a, b, fares))
+
+#### 5 - 광고 삽입
+
+'''
+다이나믹 프로그래밍 -
+전체 구간을 초단위로 나눠 저장
+
+결과 : DP로 하니까 작은 배열에서는 답이 나오는데 메모리가 너무 크면 실패한다....
+'''
+# 동영상 재생길이 play_time
+# 광고의 길이 adv_time
+# 시청자 시청 구간정보 logs 
+# 광고를 넣을 시작 시간을 retrun (같을 경우 가장 빠른 시각)
+
+play_time = "02:03:55"
+adv_time = "00:14:15"
+logs = ["01:20:15-01:45:14", "00:40:31-01:00:00", "00:25:50-00:48:29", "01:30:59-01:53:29", "01:37:44-02:02:30"]
+
+# play_time 길이로 변환
+def time_convert(time: str):
+    h = int(time[0:2])
+    m = int(time[3:5])
+    s = int(time[6:9])
+    length = h * 3600 + m * 60 + s
+    return length
+
+def reconvert(time: int):
+    h = time // 3600
+    m = (time % 3600) // 60
+    s = (time % 3600) % 60
+    if h < 10:
+        h = '0' + str(h)
+    if m < 10:
+        m = '0' + str(m)
+    if s < 10:
+        s = '0' + str(s)
+    return f"{h}:{m}:{s}"
+
+
+# def solution(play_time, adv_time, logs):
+#     dp = [0 for _ in range(time_convert(play_time)+1)]
+    
+#     for log in logs:
+#         log = log.split("-")
+#         start = time_convert(log[0])
+#         end = time_convert(log[1])
+        
+#         for i in range(start, end):
+#             dp[i] += 1
+#     answer = 0
+#     idx = 0
+#     adv_len = time_convert(adv_time)
+#     for i in range(1, len(dp) - adv_len+1):
+#         cur = 0
+#         for j in range(i, i + adv_len):
+#             cur += dp[j]
+#         if cur > answer:
+#             answer = cur
+#             idx = i
+#     return reconvert(idx)
+
+## 다른풀이 - DP를 좀더 효율적으로 바꾸면 되는 것..
+def solution(play_time, adv_time, logs):
+    dp = [0 for _ in range(time_convert(play_time)+1)]
+    adv_time = time_convert(adv_time)
+    play_time = time_convert(play_time)
+
+    
+    for log in logs:
+        log = log.split("-")
+        start = time_convert(log[0])
+        end = time_convert(log[1])
+        
+        dp[start] += 1
+        dp[end] -= 1
+    
+    for i in range(1, len(dp)):
+        dp[i] = dp[i] + dp[i-1]
+    for i in range(1, len(dp)):
+        dp[i] = dp[i] + dp[i-1]
+    
+    most_view = 0
+    max_time = 0
+    for i in range(adv_time - 1, play_time):
+        if i >= adv_time:
+            if most_view < dp[i] - dp[i - adv_time]:
+                most_view = dp[i] - dp[i - adv_time]
+                max_time = i - adv_time + 1
+        else:
+            if most_view < dp[i]:
+                most_view = dp[i]
+                max_time = i - adv_time + 1
+    
+    return reconvert(max_time)
+    
+    
+        
+print(solution(play_time, adv_time, logs))
+
+
+
