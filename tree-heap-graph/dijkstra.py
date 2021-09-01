@@ -5,6 +5,7 @@ import heapq
 def dijkstra(graph, start, end):
     # 시작 정점에서 각 정점까지의 거리를 저장할 딕셔너리를 생성하고, 무한대(inf)로 초기화합니다.
     distances = {vertex: [float('inf'), start] for vertex in graph}
+    print(distances)
 
     # 그래프의 시작 정점의 거리는 0으로 초기화 해줌
     distances[start] = [0, start]

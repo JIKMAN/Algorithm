@@ -44,9 +44,8 @@ print(solution(s))
 ## 다른 사람의 풀이
 
 def another_solution(s):
-    result = s
     for key, value in dic.items():
-        result = result.replace(key, value)
-    return int(result)
+        s = s.replace(key, value)
+    return int(s)
 
 print(another_solution(s))
