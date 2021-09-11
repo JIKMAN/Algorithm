@@ -13,16 +13,13 @@
 첫째 줄에 말이 지날 수 있는 최대의 칸 수를 출력한다.
 '''
 
-import sys
-input = sys.stdin.readline
+R, C = 2, 4 # 세로, 가로
+route = [['C', 'A', 'A', 'B'], ['A', 'D', 'C', 'B']]
 
-# R, C = 2, 4 # 세로, 가로
-# route = [['C', 'A', 'A', 'B'], ['A', 'D', 'C', 'B']]
+def dfs(R, C, route):
+    dx = [-1, 0, 1, 0]
+    dy = [0, 1, 0, -1]
 
-dx = [-1, 0, 1, 0]
-dy = [0, 1, 0, -1]
-
-def dfs():
     answer = 1
     q = set()
     q.add((0, 0, route[0][0]))
@@ -40,9 +37,4 @@ def dfs():
                 answer = max(answer, len(words + route[nx][ny]))
     return answer
 
-R, C = map(int, input().split())
-route = []
-for i in range(R):
-    route.append(list(input()))
-
-print(dfs())
+print(dfs(R,C, route))
