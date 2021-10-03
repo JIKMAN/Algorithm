@@ -1,32 +1,33 @@
-from collections import deque
-from collections import defaultdict
+from collections import defaultdict, deque
 
-n = 8
-k = 8
-time = [0, 10, 20, 1, 5, 8, 7, 1, 43]
-nodes = [(1, 2), (1, 3), (2, 4), (2, 5), (3, 6), (5, 7), (6, 7), (7, 8)]
-end = 7
-indegree = [0] * (n+1)
-dp = [0] * (n+1)
+t = int(input())
+for _ in range(t):
+    n, k = map(int, input().split())
+    work = list(map(int, input().split()))
+    building = []
+    for _ in range(k):
+        building.append(tuple(map(int, input().split())))
+    end = int(input())
 
-graph = defaultdict(list)
+    dp = [0] * (n+1)
+    indegree = [0 for _ in range(n+1)]
+    graph = defaultdict(list)
+    q = deque()
 
-for i in nodes:
-    graph[i[0]].append(i[1])
-    indegree[i[1]] += 1
+    for a, b in building:
+        graph[a].append(b)
+        indegree[b] += 1
 
-q = deque()
-
-for i in range(1, n+1):
-    if indegree[i] == 0:
-        q.append(i)
-        dp[i] = time[i]
-
-while q:
-    cur = q.popleft()
-    for i in graph[cur]:
-        indegree[i] -= 1
-        dp[i] = max(time[i] + dp[cur], dp[i])
+    for i in range(1, n+1):
         if indegree[i] == 0:
-            q.append(i)
-print(dp[end])
+            q.append(i)  
+            dp[i] = work[i-1]  
+
+    while q:
+        cur = q.popleft()
+        for i in graph[cur]:
+            indegree[i] -= 1
+            dp[i] = max(dp[i], dp[cur] + work[i-1])
+            if indegree[i] == 0:
+                q.append(i)
+    print(dp[end])
