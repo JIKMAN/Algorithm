@@ -5,7 +5,7 @@ arr = []
 for _ in range(m):
     arr.append(tuple(map(int, input().split())))
 
-indegree = [0 for _ in range(n + 1)]
+indegree = [0] * (n + 1)
 q = deque()
 graph = defaultdict(list)
 

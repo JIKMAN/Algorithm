@@ -69,6 +69,6 @@ def dfs(x, y):
                 graph[nx][ny] = graph[x][y] + 1
                 queue.append((nx, ny))
     
-    return graph[n-1][m-1]
+    return graph
 
 print(dfs(0,0))
