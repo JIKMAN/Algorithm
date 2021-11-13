@@ -21,17 +21,18 @@ from collections import defaultdict
 
 
 def solution(logs):
-    tester = defaultdict()
+    tester = defaultdict() # 문제의 점수를 담은 dict
 
-    solve = defaultdict(int)
+    solve = defaultdict(int) # 푼 문제의 수를 담는 dict
 
-    id = set()
+    id = set() # 시험에 참여한 학생의 번호 - 중복 제거
+
     for i in range(len(logs)):
         logs[i] = logs[i].split(" ")
         tester[logs[i][0]] = [0 for _ in range(101)]
         id.add(logs[i][0])
         solve[logs[i][0]] += 1
-
+    
     for a,b,c in logs:
         if tester[a][int(b)] != 0:
             tester[a][int(b)] = max(tester[a][int(b)], int(c))
@@ -47,9 +48,10 @@ def solution(logs):
             if tester[id[i]] == tester[id[j]]:
                 result.append(id[i])
                 result.append(id[j])
-    if result is None:
+    if result:
+        return sorted(set(result))
+    else:
         return None
-    return sorted(set(result))
 
 
 print(solution(logs))
